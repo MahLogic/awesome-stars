@@ -1,0 +1,29 @@
+{
+  "name": "@awesome-stars/frontend",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev --turbo -p 3002",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@awesome-stars/api": "workspace:*",
+    "next": "14.2.13",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@types/bun": "1.1.10",
+    "@types/node": "22.7.4",
+    "@types/react": "18.3.10",
+    "@types/react-dom": "18.3.0",
+    "@awesome-stars/api": "workspace:*",
+    "@awesome-stars/typescript-config": "workspace:*",
+    "autoprefixer": "latest",
+    "postcss": "latest",
+    "tailwindcss": "latest",
+    "typescript": "5.6.2"
+  }
+}
