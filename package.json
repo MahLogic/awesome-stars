@@ -1,15 +1,39 @@
 {
   "name": "awesome-stars",
-  "version": "1.0.50",
+  "private": true,
+  "description": "A tool that audits GitHub repositories to detect fake or manipulated stars, calculates an adjusted “true” star count, and flags suspicious projects—helping developers, investors, and users make decisions based on trustworthy signals instead of vanity metrics.",
+  "packageManager": "bun@1.1.29",
+  "workspaces": ["apps/*", "packages/*"],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts"
+    "dev": "bun --filter '*' dev",
+    "dev:frontend": "bun --filter 'apps/frontend' dev",
+    "dev:backend": "bun --filter 'apps/backend' dev",
+    "commit": "git cz",
+    "build": "concurrently --kill-others -n 'backend,web' -c '#00ccff,#ffcc00' 'bun run --filter ./apps/backend start' 'turbo build'",
+    "clean": "git clean -xdf .turbo node_modules",
+    "check": "bun format-and-lint && bun check:case && bun check:knip",
+    "check:case": "bunx --bun case-police",
+    "check:knip": "bunx --bun knip",
+    "check:updates": "bunx npm-check-updates -ui -ws",
+    "format-and-lint": "biome check .",
+    "format-and-lint:fix": "biome check . --write",
+    "typecheck": "bun run --filter '*' typecheck"
   },
-  "dependencies": {
-    "elysia": "latest"
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-git",
+      "useEmoji": true
+    }
   },
   "devDependencies": {
-    "bun-types": "latest"
-  },
-  "module": "src/index.js"
+    "@biomejs/biome": "1.9.2",
+    "@changesets/changelog-github": "0.5.0",
+    "@commitlint/config-conventional": "19.5.0",
+    "@types/bun": "1.1.10",
+    "commitizen": "4.3.1",
+    "concurrently": "9.0.1",
+    "cz-git": "1.10.0",
+    "lefthook": "1.7.18",
+    "typescript": "5.6.2"
+  }
 }
